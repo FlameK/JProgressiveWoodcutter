@@ -15,4 +15,6 @@ public class Vars {
 
     public String status;
 
+    public HashMap<String, Integer> bankCache = null;
+
 }

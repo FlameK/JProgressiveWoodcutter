@@ -47,6 +47,11 @@ public class JProgressiveWoodcutter extends Script implements Painting {
         }
     }
 
+    public static void stopScript(String reason){
+        General.println("Script stopped : " + reason);
+        Vars.get().shouldRun = false;
+    }
+
     @Override
     public void onPaint(Graphics g) {
         g.setColor(Color.WHITE);
