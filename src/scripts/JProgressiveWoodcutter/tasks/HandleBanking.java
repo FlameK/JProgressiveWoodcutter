@@ -47,6 +47,7 @@ public class HandleBanking extends Task {
 
             case UPGRADE_AXE:
                 RSItem[] unwantedAxes = Inventory.find(Filters.Items.nameContains(" axe").combine(Filters.Items.nameNotContains(getBestAxe()), false));
+                String bestAxe = getBestAxe();
                 if (unwantedAxes.length > 0) {
                     General.println("Depositing unwanted axes.");
                     for (RSItem axe : unwantedAxes) {
@@ -54,8 +55,8 @@ public class HandleBanking extends Task {
                     }
                 }
 
-                if (Banking.withdraw(1, getBestAxe()))
-                    Sleep.waitCondition(() -> Inventory.find(getBestAxe()).length > 0, 2000);
+                if (Banking.withdraw(1, bestAxe))
+                    Sleep.waitCondition(() -> Inventory.find(bestAxe).length > 0, 2000);
                 break;
 
             case DEPOSIT_ITEMS:
