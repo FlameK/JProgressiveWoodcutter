@@ -24,7 +24,7 @@ public class HandleBanking extends Task {
 
     @Override
     public boolean canProcess() {
-        return Vars.get().bankCache == null || Inventory.isFull();
+        return Vars.get().bankCache.size() == 0 || Inventory.isFull();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class HandleBanking extends Task {
             return TaskState.OPEN_BANK;
         }
 
-        if (Vars.get().bankCache == null){
+        if (Vars.get().bankCache.size() == 0){
             return TaskState.SET_BANK_CACHE;
         }
 
@@ -100,16 +100,16 @@ public class HandleBanking extends Task {
         int woodcuttingLevel = Skills.getActualLevel(Skills.SKILLS.WOODCUTTING);
 
         if (cache != null) {
-            if (cache.containsKey("Rune axe") && woodcuttingLevel >= 41)
+            if (woodcuttingLevel >= 41 && (getInventoryAxe().equals("Rune axe") || cache.containsKey("Rune axe")))
                 return "Rune axe";
 
-            if (cache.containsKey("Adamant axe") && woodcuttingLevel >= 31)
+            if (woodcuttingLevel >= 31 && (getInventoryAxe().equals("Adamant axe") || cache.containsKey("Adamant axe")))
                 return "Adamant axe";
 
-            if (cache.containsKey("Mithril axe") && woodcuttingLevel >= 21)
+            if (woodcuttingLevel >= 21 && (getInventoryAxe().equals("Mithril axe") || cache.containsKey("Mithril axe")))
                 return "Mithril axe";
 
-            if (cache.containsKey("Steel axe") && woodcuttingLevel >= 6)
+            if (woodcuttingLevel >= 6 && (getInventoryAxe().equals("Steel axe") || cache.containsKey("Steel axe")))
                 return "Steel axe";
 
             return getInventoryAxe();
