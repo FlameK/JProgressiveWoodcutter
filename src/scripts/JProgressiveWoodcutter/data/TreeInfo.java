@@ -30,4 +30,5 @@ public enum TreeInfo {
         int woodcuttingLevel = Skills.getActualLevel(Skills.SKILLS.WOODCUTTING);
         return woodcuttingLevel < 15 ? NORMAL.treeArea : woodcuttingLevel < 30 ? OAK.treeArea : woodcuttingLevel < 60 ? WILLOW.treeArea : YEW.treeArea;
     }
+
 }

@@ -29,7 +29,7 @@ public class HandleWoodcutting extends Task {
 
     @Override
     public String status() {
-        return "Woodcutting.";
+        return "Woodcutting." + " STATE: " + getTaskState().name();
     }
 
     @Override
@@ -47,7 +47,6 @@ public class HandleWoodcutting extends Task {
                 break;
 
             case MOVE_TO_PREDICTED:
-
                 if (ABC2.shouldMoveAnticipated()) {
                     RSObject[] stump = Objects.findNearest(10, "Tree stump");
                     if (stump.length >= 1)
@@ -69,6 +68,7 @@ public class HandleWoodcutting extends Task {
                 while (Player.getAnimation() != -1) {
                     ABC2.handleIdleActions();
                 }
+                ABC2.get().generateAndSleep((int) lastWoodcuttingWaitTime);
                 updateStatistics(timeStarted);
                 break;
         }
@@ -87,7 +87,7 @@ public class HandleWoodcutting extends Task {
             return TaskState.WALK_TO_TREE_AREA;
         }
 
-        trees = Objects.findNearest(10, TreeInfo.getTreeName());
+        trees = Objects.findNearest(10, Filters.Objects.nameEquals(TreeInfo.getTreeName()).combine(Filters.Objects.inArea(TreeInfo.getTreeArea()), false));
 
         if (trees.length == 0) {
             return TaskState.MOVE_TO_PREDICTED;
@@ -117,7 +117,7 @@ public class HandleWoodcutting extends Task {
             General.sleep(50, 100);
         }
         long idleStopTime = System.currentTimeMillis();
-        ABC2.get().generateAndSleep((int) (idleStopTime - idleStartTime));
+        ABC2.get().generateAndSleep((int)(idleStopTime - idleStartTime));
     }
 
 }
