@@ -7,6 +7,7 @@ import org.tribot.script.interfaces.Painting;
 import scripts.JProgressiveWoodcutter.data.Vars;
 import scripts.JProgressiveWoodcutter.framework.Task;
 import scripts.JProgressiveWoodcutter.tasks.HandleBanking;
+import scripts.JProgressiveWoodcutter.tasks.HandleDropping;
 import scripts.JProgressiveWoodcutter.tasks.HandleWoodcutting;
 import scripts.heyimjamie.dataformatting.ValueFormatting;
 
@@ -32,6 +33,7 @@ public class JProgressiveWoodcutter extends Script implements Painting {
     }
 
     private void addTasks(){
+        tasks.add(new HandleDropping());
         tasks.add(new HandleBanking());
         tasks.add(new HandleWoodcutting());
     }
